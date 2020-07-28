@@ -6,6 +6,7 @@
     - use array implementation
     - need to implement resizing array - but skip for now.
         * turns out we need to resize to provide extra capacity to array at all times (SOLUTION).
+        * Remember: arrays double in size if the capacity require expansion (all space is used up). This provides extra capacity.
  **************************************************************************** */
 
 import edu.princeton.cs.algs4.StdRandom;
@@ -56,8 +57,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     //     if(isEmpty()) throw new NoSuchElementException("Stack underflow");
     //     int ind = StdRandom.uniform(N-1);
     //     Item item = s[ind];
-    //     s[ind] = s[N-1];
-    //     s[N-1] = null;
+    //     s[ind] = s[N-1];     // move the random index item to the end of the array; this allows better array organization.
+    //     s[N-1] = null;       // prevent loitering by nullifying the data
     //     N--;
     //     return item;
     // }

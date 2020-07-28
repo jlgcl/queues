@@ -1,13 +1,14 @@
 /* *****************************************************************************
  *  Name:
  *  Date: July 12, 2020
- *  Description:
+ *  Description:    Deque allows add/remove from both first/last
  - constant worst-case time, O(1)
  - implement Deque in linked-list & RandomizedQueue in array
  * take care of loitering & consider resizing array
  * Reference programs: ResizingArrayStack.java & LinkedStack.java
  *
  * REMEMBER:
+    * the key to working with stacks/queues are removing/adding through index referencing!!! Then nullify the removed element as required.
     * first.next is a data structure for that node.
     * iterator() allow clients to iterate through objects of whatever type is provided by our client.
         * this can be replaced with the foreach method.
@@ -26,7 +27,7 @@ public class Deque<Item> implements Iterable<Item> {
     private class Node {
         Item item;
         Node next;
-        Node prev;
+        Node prev;  // prev is required to see both sides (removeLast)
     }
 
     // construct an empty deque
@@ -45,7 +46,7 @@ public class Deque<Item> implements Iterable<Item> {
         return n;
     }
 
-    // add the item to the front
+    // add the item to the front (same as stacks/queues)
     public void addFirst(Item item) {
         Node oldfirst
                 = first;  // creates a new Node called "oldfirst" & assign to it the current first.
@@ -56,7 +57,7 @@ public class Deque<Item> implements Iterable<Item> {
         n++;
     }
 
-    // add the item to the back
+    // add the item to the back (same as enqueue for a typical queue)
     public void addLast(Item item) {
         // may need to see the 'last' reference after node is removed from last.
         Node oldlast = last;
@@ -71,10 +72,10 @@ public class Deque<Item> implements Iterable<Item> {
         n++;
     }
 
-    // remove and return the item from the front
+    // remove and return the removed item from the front (similar to a typical stack)
     public Item removeFirst() {
         if (isEmpty()) throw new NoSuchElementException("Stack Underflow");
-        Node oldfirst = first;
+        Node oldfirst = first;      // defines the current first as oldfirst.
         Item item
                 = first.item;     // initializes & save the first.item that is to be deleted to be returned in this method.
         first = first.next;
@@ -88,7 +89,7 @@ public class Deque<Item> implements Iterable<Item> {
         if (isEmpty()) throw new NoSuchElementException("Stack Underflow");
         Item item = last.item;
         last.item = null;
-        last = last.prev;
+        last = last.prev;   // prev is required to set the new last.
         n--;
         return item;
     }
